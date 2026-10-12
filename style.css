@@ -1529,202 +1529,210 @@ h2 {
    Adjust navigation and layouts for screens 650px or less.
    ========================================================= */
 
+
+/* =========================================================
+   RESPONSIVE MOBILE SIDEBAR
+   Solid background, slide animation, and hover effects
+   ========================================================= */
+
 @media (max-width: 650px) {
 
-  /* Mobile navigation bar. */
+  /* Keep the navbar above the page background. */
   .navbar {
-    padding: 18px 20px;
-    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 20px;
+
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
-  /* Display the mobile menu button. */
+  /* Mobile logo */
+  .logo {
+    font-size: 2.4rem;
+  }
+
+  /* Menu toggle button */
   .menu-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    color: var(--text);
+    background: var(--surface-light);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    font-size: 1.7rem;
+
+    transition:
+      color 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.25s ease;
   }
 
-  /* Hide the navigation menu until opened. */
-  .navbar nav {
-    display: none;
+  .menu-toggle:hover,
+  .menu-toggle:focus-visible {
+    color: var(--bg);
+    background: var(--green);
+    border-color: var(--green);
+    transform: scale(1.04);
+    outline: none;
+  }
 
-    position: absolute;
-    top: 100%;
-    left: 0;
+  /* Sidebar panel */
+  .navbar nav {
+    position: fixed;
+    top: 0;
     right: 0;
 
-    padding: 20px;
+    width: min(82vw, 340px);
+    height: 100vh;
+    height: 100dvh;
 
+    padding: 105px 24px 30px;
+
+    display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 18px;
+    justify-content: flex-start;
+    gap: 10px;
 
-    background: var(--overlay-bg);
-    border-bottom: 1px solid var(--border);
+    /* Fully opaque, theme-aware background */
+    background: var(--surface);
+    color: var(--text);
+
+    border-left: 1px solid var(--border);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.25);
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    /* Start outside the right side of the screen */
+    transform: translateX(105%);
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.35s ease;
+
+    z-index: 1002;
   }
 
-  /* JavaScript adds .open to display the menu. */
+  /* Open the sidebar when JavaScript adds .open */
   .navbar nav.open {
-    display: flex;
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
   }
 
-  /* Center the main mobile navigation button. */
+  /* Individual navigation links */
+  .navbar nav a {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 50px;
+
+    padding: 13px 15px;
+
+    color: var(--muted);
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    transition:
+      color 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      padding-left 0.25s ease;
+  }
+
+  /* Hover and keyboard focus effects */
+  .navbar nav a:hover,
+  .navbar nav a:focus-visible {
+    color: var(--green);
+    background: rgba(var(--particle-rgb), 0.09);
+    border-color: rgba(var(--particle-rgb), 0.2);
+    padding-left: 22px;
+    outline: none;
+  }
+
+  /* Highlight the currently selected section when marked active */
+  .navbar nav a.active {
+    color: var(--green);
+    background: rgba(var(--particle-rgb), 0.12);
+    border-left: 3px solid var(--green);
+  }
+
+  /* Main call-to-action */
   .navbar nav .nav-cta {
+    justify-content: center;
+
+    margin-top: 15px;
+    padding: 14px 18px;
+
+    color: var(--bg);
+    background: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+
     text-align: center;
   }
 
-  /* Reduce section spacing. */
-  .section {
-    padding: 70px 20px;
+  .navbar nav .nav-cta:hover,
+  .navbar nav .nav-cta:focus-visible {
+    color: var(--bg);
+    background: transparent;
+    border-color: var(--green);
+    padding-left: 18px;
   }
 
-  /* Stack hero content vertically. */
-  .hero {
-    grid-template-columns: 1fr;
+  /* Dim the page behind the open sidebar.
+     Requires :has() support in the browser. */
+  .navbar:has(nav.open)::after {
+    content: "";
 
-    padding-top: 75px;
-    padding-bottom: 100px;
+    position: fixed;
+    inset: 0;
 
-    gap: 10px;
+    background: rgba(0, 0, 0, 0.58);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    z-index: 1001;
+    pointer-events: none;
   }
 
-  /* Make the main heading responsive. */
-  h1 {
-    font-size: clamp(3.4rem, 14vw, 5rem);
-  }
-
-  /* Reduce paragraph size on mobile. */
-  .hero-description {
-    font-size: 0.95rem;
-  }
-
-  /* Adjust the hero illustration. */
-  .hero-visual {
-    min-height: 360px;
-    transform: none;
-    margin: 10px 0;
-  }
-
-  .visual-card {
-    max-width: 350px;
-    transform: none;
-  }
-
-  .visual-art {
-    height: 220px;
-  }
-
-  /* Shrink decorative orbit rings. */
-  .orbit {
-    width: 310px;
-    height: 160px;
-  }
-
-  /* Reposition floating labels. */
-  .tag-top {
-    right: 0;
-    top: 20px;
-  }
-
-  .tag-bottom {
-    left: 0;
-    bottom: 10px;
-  }
-
-  /* Reduce bottom hero metadata size. */
-  .hero-bottom {
-    bottom: 20px;
-    font-size: 0.48rem;
-  }
-
-  /* Stack major content grids into one column. */
-  .service-grid,
-  .project-grid,
-  .about,
-  .process-grid,
-  .contact-panel {
-    grid-template-columns: 1fr;
-  }
-
-  /* Reset the last service card's grid placement. */
-  .service-card:last-child {
-    grid-column: auto;
-  }
-
-  /* Adjust service card padding. */
-  .service-card {
-    padding: 25px;
-  }
-
-  /* Stack portfolio heading and description. */
-  .work-heading {
-    display: block;
-  }
-
-  .work-heading > p {
-    margin-top: 18px;
-  }
-
-  /* Increase artwork height on mobile. */
-  .project-art {
-    height: 320px;
-  }
-
-  /* Adjust About section artwork. */
-  .about-visual {
-    min-height: 330px;
-  }
-
-  .about-frame {
-    max-width: 320px;
-    height: 320px;
-  }
-
-  /* Tighten company values spacing. */
-  .values-grid {
-    gap: 20px;
-  }
-
-  /* Space out vertically stacked process steps. */
-  .process-grid {
-    gap: 28px;
-  }
-
-  .process-step h3 {
-    margin-top: 12px;
-  }
-
-  /* Adjust contact panel for narrow screens. */
-  .contact-panel {
-    padding: 27px 20px;
-    gap: 35px;
-  }
-
-  /* Stack footer content. */
-  .footer {
-    padding: 28px 20px;
-    justify-content: flex-start;
-  }
-
-  .footer > p,
-  .footer-links,
-  .copyright {
-    width: 100%;
+  /* Prevent accidental horizontal overflow */
+  body {
+    overflow-x: hidden;
   }
 }
 
-
-/* =========================================================
-   19. ACCESSIBILITY: REDUCED MOTION
-   Reduce animation for users who prefer less movement.
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+/* Disable sliding animation for reduced-motion preferences */
+@media (max-width: 650px) and
+       (prefers-reduced-motion: reduce) {
+  .navbar nav {
+    transition: none;
   }
 }

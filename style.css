@@ -1883,3 +1883,51 @@ h2 {
   }
 }
 
+/* ============================================================
+   MOBILE HERO TEXT FIX
+   Prevents animated headings from overflowing or crowding
+   the supporting paragraph and buttons.
+   ============================================================ */
+
+@media (max-width: 650px) {
+
+  .hero {
+    padding: 45px 20px 35px;
+    min-width: 0;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(36px, 10vw, 58px);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
+  }
+
+  #typingText {
+    display: inline;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .hero p {
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 100%;
+  }
+
+  .hero .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero .hero-buttons a,
+  .hero .hero-buttons button {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+

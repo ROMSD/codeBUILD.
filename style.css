@@ -1472,462 +1472,111 @@ h2 {
    Adjust the layout for screens 900px wide or smaller.
    ========================================================= */
 
-@media (max-width: 900px) {
 
-  /* Reduce general section spacing. */
-  .section {
-    padding: 85px 24px;
-  }
-
-  /* Tighten the hero layout. */
-  .hero {
-    gap: 20px;
-    min-height: 620px;
-  }
-
-  /* Reduce the hero illustration slightly. */
-  .hero-visual {
-    transform: scale(0.88);
-  }
-
-  /* Display services in two columns. */
-  .service-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* Let the last service occupy the full row. */
-  .service-card:last-child {
-    grid-column: 1 / -1;
-  }
-
-  /* Let descriptions determine their own height. */
-  .service-card > p {
-    min-height: auto;
-  }
-
-  /* Reduce the gap in the About section. */
-  .about {
-    gap: 35px;
-  }
-
-  /* Reduce contact panel spacing. */
-  .contact-panel {
-    padding: 35px;
-    gap: 35px;
-  }
-
-  /* Reduce project artwork height. */
-  .project-art {
-    height: 250px;
-    padding: 17px;
-  }
-}
-
-
-/* =========================================================
-   18. RESPONSIVE DESIGN: MOBILE
-   Adjust navigation and layouts for screens 650px or less.
-   ========================================================= */
-
-
-/* =========================================================
-   RESPONSIVE MOBILE SIDEBAR
-   Solid background, slide animation, and hover effects
-   ========================================================= */
-
+/* MOBILE NAVIGATION — CLEAN FIX */
 @media (max-width: 650px) {
 
-  /* Keep the navbar above the page background. */
   .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    padding: 14px 20px;
-
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    gap: 10px;
+    padding: 18px 16px;
+    background: var(--bg);
   }
 
-  /* Mobile logo */
-  .logo {
-    font-size: 2.4rem;
+  .navbar .logo {
+    min-width: 0;
+    font-size: clamp(24px, 6vw, 34px);
+    white-space: nowrap;
   }
 
-  /* Menu toggle button */
   .menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 46px;
-    height: 46px;
-
-    color: var(--text);
-    background: var(--surface-light);
-
-    border: 1px solid var(--border);
-    border-radius: 10px;
-
-    font-size: 1.7rem;
-
-    transition:
-      color 0.25s ease,
-      background-color 0.25s ease,
-      border-color 0.25s ease,
-      transform 0.25s ease;
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1003;
   }
 
-  .menu-toggle:hover,
-  .menu-toggle:focus-visible {
-    color: var(--bg);
-    background: var(--green);
-    border-color: var(--green);
-    transform: scale(1.04);
-    outline: none;
-  }
-
-  /* Sidebar panel */
+  /* Navigation is removed from the normal page layout. */
   .navbar nav {
-    position: fixed;
-    top: 0;
-    right: 0;
+    display: flex !important;
+    position: fixed !important;
 
-    width: min(82vw, 340px);
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+
+    width: min(80vw, 300px);
     height: 100vh;
     height: 100dvh;
+    box-sizing: border-box;
 
-    padding: 105px 24px 30px;
-
-    display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 12px;
 
-    /* Fully opaque, theme-aware background */
-    background: var(--surface);
-    color: var(--text);
-
-    border-left: 1px solid var(--border);
-    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.25);
-
+    padding: 110px 22px 30px;
     overflow-y: auto;
-    overscroll-behavior: contain;
 
-    /* Start outside the right side of the screen */
-    transform: translateX(105%);
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+
+    transform: translateX(110%);
     visibility: hidden;
     pointer-events: none;
 
     transition:
-      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      visibility 0.35s ease;
+      transform 0.25s ease,
+      visibility 0.25s ease;
 
     z-index: 1002;
   }
 
-  /* Open the sidebar when JavaScript adds .open */
+  /* Open the drawer only when JavaScript adds .open. */
   .navbar nav.open {
     transform: translateX(0);
     visibility: visible;
     pointer-events: auto;
   }
 
-  /* Individual navigation links */
   .navbar nav a {
-    display: flex;
-    align-items: center;
-
-    width: 100%;
-    min-height: 50px;
-
-    padding: 13px 15px;
-
-    color: var(--muted);
-    background: transparent;
-
-    border: 1px solid transparent;
+    display: block;
+    padding: 14px;
     border-radius: 8px;
-
-    font-size: 1rem;
-    font-weight: 600;
-
-    transition:
-      color 0.25s ease,
-      background-color 0.25s ease,
-      border-color 0.25s ease,
-      padding-left 0.25s ease;
+    color: var(--text);
+    text-decoration: none;
   }
 
-  /* Hover and keyboard focus effects */
   .navbar nav a:hover,
   .navbar nav a:focus-visible {
-    color: var(--green);
-    background: rgba(var(--particle-rgb), 0.09);
-    border-color: rgba(var(--particle-rgb), 0.2);
-    padding-left: 22px;
-    outline: none;
-  }
-
-  /* Highlight the currently selected section when marked active */
-  .navbar nav a.active {
-    color: var(--green);
-    background: rgba(var(--particle-rgb), 0.12);
-    border-left: 3px solid var(--green);
-  }
-
-  /* Main call-to-action */
-  .navbar nav .nav-cta {
-    justify-content: center;
-
-    margin-top: 15px;
-    padding: 14px 18px;
-
-    color: var(--bg);
-    background: var(--green);
-    border: 1px solid var(--green);
-    border-radius: 8px;
-
-    text-align: center;
-  }
-
-  .navbar nav .nav-cta:hover,
-  .navbar nav .nav-cta:focus-visible {
-    color: var(--bg);
-    background: transparent;
-    border-color: var(--green);
-    padding-left: 18px;
-  }
-
-  /* Dim the page behind the open sidebar.
-     Requires :has() support in the browser. */
-  .navbar:has(nav.open)::after {
-    content: "";
-
-    position: fixed;
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.58);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-
-    z-index: 1001;
-    pointer-events: none;
-  }
-
-  /* Prevent accidental horizontal overflow */
-  body {
-    overflow-x: hidden;
-  }
-}
-
-/* Disable sliding animation for reduced-motion preferences */
-@media (max-width: 650px) and
-       (prefers-reduced-motion: reduce) {
-  .navbar nav {
-    transition: none;
-  }
-}
-
-/* ============================================================
-   MOBILE NAVIGATION FIX
-   Creates a clean, readable mobile dropdown/sidebar.
-   ============================================================ */
-
-@media (max-width: 650px) {
-
-  /* Keep the header items aligned in one row. */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-
-    gap: 10px;
-    padding: 16px 20px;
-  }
-
-  /* Prevent the logo from pushing the controls off-screen. */
-  .navbar .logo {
-    min-width: 0;
-    flex-shrink: 1;
-    font-size: clamp(25px, 7vw, 38px);
-    white-space: nowrap;
-  }
-
-  /* Keep the menu and theme buttons visible. */
-  .menu-toggle,
-  #themeToggle {
-    flex-shrink: 0;
-  }
-
-  .menu-toggle {
-    display: block;
-    position: relative;
-    z-index: 1003;
-    cursor: pointer;
-  }
-
-  /* Mobile navigation drawer: closed by default. */
-  .navbar nav,
-  #navLinks {
-    position: fixed;
-    top: var(--mobile-nav-top, 100px);
-    right: 0;
-    bottom: 0;
-    left: auto;
-
-    width: min(82vw, 320px);
-    height: auto;
-    max-height: calc(100dvh - var(--mobile-nav-top, 100px));
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 8px;
-
-    padding: 28px 22px;
-    overflow-y: auto;
-
-    background: var(--surface, #101313);
-    border-left: 1px solid var(--border, #303530);
-    box-shadow: -12px 0 35px rgba(0, 0, 0, 0.18);
-
-    z-index: 1002;
-
-    transform: translateX(105%);
-    visibility: hidden;
-    pointer-events: none;
-
-    transition:
-      transform 0.3s ease,
-      visibility 0.3s ease;
-  }
-
-  /* Show the drawer when JavaScript adds .open. */
-  .navbar nav.open,
-  #navLinks.open {
-    transform: translateX(0);
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  /* Make each navigation link easy to tap. */
-  .navbar nav a,
-  #navLinks a {
-    display: block;
-    width: 100%;
-    padding: 14px 16px;
-
-    color: var(--text, #f5f5f5);
-    font-size: 18px;
-    line-height: 1.4;
-    text-decoration: none;
-
-    border-radius: 10px;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  /* Clear hover, keyboard-focus and tap feedback. */
-  .navbar nav a:hover,
-  .navbar nav a:focus-visible,
-  #navLinks a:hover,
-  #navLinks a:focus-visible {
+    color: var(--accent);
     background: rgba(196, 255, 77, 0.12);
-    color: var(--accent, #c4ff4d);
-    outline: none;
   }
 
-  .navbar nav a:active,
-  #navLinks a:active {
-    transform: scale(0.98);
-  }
-
-  /* Keep the call-to-action button properly sized. */
-  .navbar nav .nav-cta,
-  #navLinks .nav-cta {
-    width: 100%;
-    margin-top: 8px;
-    text-align: center;
-  }
-
-  /* Prevent the page behind the open drawer from scrolling. */
   body.sidebar-open {
     overflow: hidden;
   }
-}
 
-/* Respect users who prefer reduced motion. */
-@media (prefers-reduced-motion: reduce) {
-  .navbar nav,
-  #navLinks,
-  .navbar nav a,
-  #navLinks a {
-    transition: none;
-  }
-}
-
-/* ============================================================
-   MOBILE HERO TEXT FIX
-   Prevents animated headings from overflowing or crowding
-   the supporting paragraph and buttons.
-   ============================================================ */
-
-@media (max-width: 650px) {
-
+  /* Keep the hero in the page layout, below the header. */
   .hero {
-    padding: 45px 20px 35px;
-    min-width: 0;
+    position: relative;
+    z-index: 1;
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 55px 20px 70px;
+    gap: 20px;
   }
 
   .hero h1 {
-    max-width: 100%;
-    font-size: clamp(36px, 10vw, 58px);
-    line-height: 1.12;
-    letter-spacing: -0.045em;
+    font-size: clamp(38px, 10vw, 58px);
+    line-height: 1.1;
     overflow-wrap: anywhere;
-  }
-
-  #typingText {
-    display: inline;
-    max-width: 100%;
-    overflow-wrap: anywhere;
-  }
-
-  .hero p {
-    font-size: 16px;
-    line-height: 1.75;
-    max-width: 100%;
-  }
-
-  .hero .hero-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .hero .hero-buttons a,
-  .hero .hero-buttons button {
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
   }
 }
-

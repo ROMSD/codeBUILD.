@@ -1500,7 +1500,7 @@ h2 {
 
     background: var(--bg);
   }
-   #home{
+   .hero-content{
       margin-top: 10px;
    }
 

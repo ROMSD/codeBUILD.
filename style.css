@@ -1500,6 +1500,9 @@ h2 {
 
     background: var(--bg);
   }
+   #home{
+      margin-top: 10px;
+   }
 
   /* Stop the logo from pushing the controls off-screen. */
   .navbar .logo {

@@ -1474,133 +1474,108 @@ h2 {
 
 
 /* MOBILE NAVIGATION — CLEAN FIX */
-@media (max-width: 768px) {
 
-  .contact-panel{
-    display: flex;
-    flex-direction: column;
-  }
-  .process-grid{
-    display: flex;
-    flex-direction: column;
+/* =========================================================
+   MOBILE NAVIGATION DRAWER — OVERLAP FIX
+   Add this block at the VERY END of style.css.
+   ========================================================= */
 
-  }
-  #about{
-    display: flex;
-    flex-direction: column;
+@media screen and (max-width: 768px) {
 
-  }
-  .project-grid{
-    display: flex;
-    flex-direction: column;
-  }
-  .hero-visual{
-    display: flex;
-    flex-direction: column;
-  }
+    /* Keep the header above the page content. */
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+        isolation: isolate;
+    }
 
+    /* Keep the menu button above the navigation drawer. */
+    #menuToggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1004;
+        flex-shrink: 0;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
 
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 18px 16px;
-    background: var(--bg);
-  }
+    /* Closed drawer: fully outside the right edge. */
+    .navbar #navLinks {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: auto !important;
 
-  .navbar .logo {
-    min-width: 0;
-    font-size: clamp(24px, 6vw, 34px);
-    white-space: nowrap;
-  }
+        width: min(82vw, 320px) !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
 
-  .menu-toggle {
-    display: block;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1003;
-  }
+        display: flex !important;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
 
-  /* Navigation is removed from the normal page layout. */
-  .navbar nav {
-    display: flex !important;
-    position: fixed !important;
+        padding: 90px 24px 30px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
 
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: auto !important;
+        background: var(--bg, #101313);
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: -12px 0 35px rgba(0, 0, 0, 0.22);
 
-    width: min(80vw, 300px);
-    height: 100vh;
-    height: 100dvh;
-    box-sizing: border-box;
+        z-index: 1002;
 
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 12px;
+        transform: translate3d(105%, 0, 0) !important;
+        visibility: hidden;
+        pointer-events: none;
 
-    padding: 110px 22px 30px;
-    overflow-y: auto;
+        transition:
+            transform 0.3s ease,
+            visibility 0.3s ease;
 
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+    }
 
-    transform: translateX(110%);
-    visibility: hidden;
-    pointer-events: none;
+    /* Open drawer: slide into view from the right. */
+    .navbar #navLinks.open {
+        transform: translate3d(0, 0, 0) !important;
+        visibility: visible;
+        pointer-events: auto;
+    }
 
-    transition:
-      transform 0.25s ease,
-      visibility 0.25s ease;
+    /* Prevent navigation links from overflowing horizontally. */
+    .navbar #navLinks a {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        padding: 15px 12px;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    }
 
-    z-index: 1002;
-  }
+    /* Prevent background scrolling while the drawer is open. */
+    body.menu-open {
+        overflow: hidden;
+        touch-action: pan-y;
+    }
 
-  /* Open the drawer only when JavaScript adds .open. */
-  .navbar nav.open {
-    transform: translateX(0);
-    visibility: visible;
-    pointer-events: auto;
-  }
+    /* Keep the theme button accessible in the header. */
+    #themeToggle {
+        position: relative;
+        z-index: 1004;
+        flex-shrink: 0;
+    }
+}
 
-  .navbar nav a {
-    display: block;
-    padding: 14px;
-    border-radius: 8px;
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .navbar nav a:hover,
-  .navbar nav a:focus-visible {
-    color: var(--accent);
-    background: rgba(196, 255, 77, 0.12);
-  }
-
-  body.sidebar-open {
-    overflow: hidden;
-  }
-
-  /* Keep the hero in the page layout, below the header. */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: auto;
-    grid-template-columns: 1fr;
-    padding: 55px 20px 70px;
-    gap: 20px;
-  }
-
-  .hero h1 {
-    font-size: clamp(38px, 10vw, 58px);
-    line-height: 1.1;
-    overflow-wrap: anywhere;
-  }
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+    .navbar #navLinks {
+        transition: none !important;
+    }
 }

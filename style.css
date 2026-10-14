@@ -1475,102 +1475,156 @@ h2 {
 
 /* MOBILE NAVIGATION — CLEAN FIX */
 
+/* =========================================================
+   MOBILE NAVIGATION FIX
+   Compact header + slide-in navigation drawer
+   ========================================================= */
+
 @media screen and (max-width: 768px) {
 
-    /* Keep the header above the page content. */
-    .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 1001;
-        isolation: isolate;
-    }
+  /* Keep the header compact and above the page content. */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    isolation: isolate;
 
-    /* Keep the menu button above the navigation drawer. */
-    #menuToggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 1004;
-        flex-shrink: 0;
-        cursor: pointer;
-        touch-action: manipulation;
-    }
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 16px;
 
-    /* Closed drawer: fully outside the right edge. */
-    .navbar #navLinks {
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        left: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 
-        width: min(82vw, 320px) !important;
-        max-width: 100% !important;
-        height: 100vh !important;
-        height: 100dvh !important;
+    background: var(--bg);
+  }
 
-        display: flex !important;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 0;
+  /* Stop the logo from pushing the controls off-screen. */
+  .navbar .logo {
+    min-width: 0;
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
 
-        padding: 90px 24px 30px;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+  .navbar .logo span {
+    margin-left: 2px;
+  }
 
-        background: var(--bg, #101313);
-        border-left: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: -12px 0 35px rgba(0, 0, 0, 0.22);
+  /* Keep the mobile controls compact and clickable. */
+  #menuToggle,
+  #themeToggle {
+    position: relative;
+    z-index: 1004;
+    flex-shrink: 0;
+  }
 
-        z-index: 1002;
+  #menuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-        transform: translate3d(105%, 0, 0) !important;
-        visibility: hidden;
-        pointer-events: none;
+    width: 42px;
+    height: 42px;
 
-        transition:
-            transform 0.3s ease,
-            visibility 0.3s ease;
+    padding: 0;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
 
-        box-sizing: border-box;
-    }
+    font-size: 1.6rem;
+    touch-action: manipulation;
+  }
 
-    /* Open drawer: slide into view from the right. */
-    .navbar #navLinks.open {
-        transform: translate3d(0, 0, 0) !important;
-        visibility: visible;
-        pointer-events: auto;
-    }
+  #themeToggle {
+    width: 40px;
+    height: 40px;
+  }
 
-    /* Prevent navigation links from overflowing horizontally. */
-    .navbar #navLinks a {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        padding: 15px 12px;
-        box-sizing: border-box;
-        overflow-wrap: anywhere;
-    }
+  /* Mobile navigation drawer. */
+  .navbar #navLinks {
+    position: fixed !important;
+    inset: 0 0 0 auto !important;
 
-    /* Prevent background scrolling while the drawer is open. */
-    body.menu-open {
-        overflow: hidden;
-        touch-action: pan-y;
-    }
+    width: min(82vw, 320px) !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: 100% !important;
 
-    /* Keep the theme button accessible in the header. */
-    #themeToggle {
-        position: relative;
-        z-index: 1004;
-        flex-shrink: 0;
-    }
+    margin: 0 !important;
+    padding: 100px 22px 30px !important;
+
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 4px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    background: var(--bg);
+    border-left: 1px solid var(--border);
+    box-shadow: -12px 0 35px rgba(0, 0, 0, 0.25);
+
+    z-index: 1002;
+
+    transform: translateX(100%) !important;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    box-sizing: border-box;
+  }
+
+  /* Display the drawer only when JavaScript adds .open. */
+  .navbar #navLinks.open {
+    transform: translateX(0) !important;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Make links easy to tap without overflowing. */
+  .navbar #navLinks a {
+    display: block;
+    flex: 0 0 auto;
+
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 12px;
+    margin: 0;
+
+    font-size: 1rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+  }
+
+  /* Separate the call-to-action from ordinary links. */
+  .navbar #navLinks .nav-cta {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* Prevent page scrolling behind the open drawer. */
+  body.menu-open {
+    overflow: hidden;
+  }
 }
 
-/* Respect reduced-motion preferences. */
+/* Disable drawer animation when reduced motion is requested. */
 @media (prefers-reduced-motion: reduce) {
-    .navbar #navLinks {
-        transition: none !important;
-    }
+  .navbar #navLinks {
+    transition: none !important;
+  }
 }

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="codeBUILD. Technologies provides web development and graphic design services.">
+  <title>codeBUILD. | Digital Solutions</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <!-- Canvas element used by JavaScript to draw the animated background -->
+  <canvas id="background3d" aria-hidden="true"></canvas>
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="navbar">
+
+    <!-- Website logo -->
+    <a class="logo" href="#home">code<span>BUILD.</span></a>
+
+    <!-- Mobile navigation button -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <!-- Main navigation links -->
+    <nav id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#about">About</a>
+     <!-- <a class="nav-cta" href="#contact">Let's Talk ↗</a>-->
+    </nav>
+
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="material-icons">light_mode</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero section" id="home">
+      <div class="hero-content">
+
+        <p class="eyebrow">
+          <span class="status-dot"></span>
+          DIGITAL SOLUTIONS THAT MOVE YOU FORWARD
+        </p>
+
+        <div class="typing-container">
+
+           <span id="typingText"  class="gradient-text"        ></span>
+           <span class="cursor">|</span>
+
+        </div>
+        <p class="hero-description">
+          We turn ideas into powerful websites and striking visual identities.
+          Your vision deserves a digital presence that stands out.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="button button-primary">Start a project ↗</a>
+          <a href="#services" class="button button-secondary">Explore services ↓</a>
+        </div>
+
+        <div class="hero-note">
+          <span class="note-line"></span>
+          <p>Web development <span>•</span> Graphic design <span>•</span> Branding</p>
+        </div>
+        
+      </div>
+
+      <!-- Decorative visual panel -->
+      <div class="hero-visual">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+
+        <div class="visual-card main-visual-card">
+          <div class="visual-card-top">
+            <span class="window-dots">● ● ●</span>
+            <span>CREATIVE STUDIO / 001</span>
+          </div>
+
+          <div class="visual-art">
+            <div class="art-circle"></div>
+            <div class="art-ring"></div>
+            <div class="art-square"></div>
+            <div class="art-cross">✳</div>
+            <span class="art-label">IDEAS INTO REALITY</span>
+          </div>
+
+          <div class="visual-card-bottom">
+            <div>
+              <span class="small-label">CREATIVE DIRECTION</span>
+              <h3 style="padding-left: 115px;">Beyond ordinary.</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-tag tag-top">✦ Creative thinking</div>
+        <div class="floating-tag tag-bottom">↗ Digital innovation</div>
+      </div>
+
+      <div class="hero-bottom">
+        <span>INDEPENDENT DIGITAL STUDIO</span>
+        <span>BUILT AROUND YOUR VISION ↓</span>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services section" id="services">
+      <div class="section-heading">
+        <p class="eyebrow">WHAT WE DO</p>
+        <h2>Creative ideas.<br><span class="muted-text">Real-world impact.</span></h2>
+        <p>Everything you need to build a stronger online presence and a memorable brand.</p>
+      </div>
+
+      <div class="service-grid">
+       
+        <article class="service-card">
+          <div class="service-icon">&lt;/&gt;</div>
+          <span class="service-number">01 / DEVELOPMENT</span>
+          <h3>Web Development</h3>
+          <p>
+              Modern, responsive websites designed to communicate your value,
+              engage visitors and help your business grow.
+          </p>
+
+          <ul>
+            <li>Business websites</li>
+            <li>Portfolio websites</li>
+            <li>Landing pages</li>
+            <li>Website maintenance</li>
+            <li>Web apps</li>
+          </ul>
+
+            <a href="#contact" class="text-link">Build your website ↗</a>
+        </article>
+     
+        <article class="service-card featured-card">
+          <div class="service-icon">✳</div>
+          <span class="service-number">02 / DESIGN</span>
+          <h3>Graphic Design</h3>
+          <p>
+            Distinctive visual content that captures attention,
+            communicates your message and gives your brand personality.
+          </p>
+
+          <ul>
+            <li>Logo design</li>
+            <li>Posters and flyers</li>
+            <li>Social media graphics</li>
+            <li>Marketing materials</li>
+          </ul>
+
+          <a href="#contact" class="text-link">Design something great ↗</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">◈</div>
+          <span class="service-number">03 / BRANDING</span>
+          <h3>Brand Identity</h3>
+          <p>
+            A consistent visual identity that helps your business look
+            professional and become recognisable.
+          </p>
+
+          <ul>
+            <li>Brand colour palettes</li>
+            <li>Typography selection</li>
+            <li>Brand starter kits</li>
+            <li>Visual style guides</li>
+          </ul>
+
+          <a href="#contact" class="text-link">Shape your brand ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO SECTION ==================== -->
+    <section class="work section" id="work">
+      <div class="work-heading">
+        <div>
+          <p class="eyebrow">SELECTED CONCEPTS</p>
+          <h2>Ideas in <span class="gradient-text">action.</span></h2>
+        </div>
+        <p>Example creative directions that can inspire your next project.</p>
+      </div>
+
+      <div class="project-grid">
+
+        <article class="project-card project-web">
+          <div class="project-art web-art">
+            <div class="mock-browser">
+              <div class="browser-bar">
+                <span>● ● ●</span>
+                <span>samwebsite.co</span>
+              </div>
+
+              <div class="browser-content">
+                <span class="mock-label">YOUR NEXT CHAPTER</span>
+                <div class="mock-title">Make your<br>mark.</div>
+                <div class="mock-button">Discover more ↗</div>
+                <div class="mock-shape"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <h3>Business Website/Apps</h3>
+              <p style="font-size: 0.9rem;">Web design / Development concept</p>
+            </div>
+            <button style="border: none; border-radius: 50%; background-color: #c4ff4d; color: black;"><span class="project-arrow"><!--↗-->1</span></button>
+          </div>
+        </article>
+
+        <article class="project-card project-brand">
+          <div class="project-art brand-art">
+            <div class="brand-poster">
+              <span>YOUR BRAND</span>
+              <div class="brand-symbol">M.</div>
+              <h3>MAKE IT<br>MATTER.</h3>
+              <span class="brand-caption">IDENTITY CONCEPT / 2026</span>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <h3>Brand Identity</h3>
+              <p style="font-size: 0.9rem;">Logo / Visual identity concept</p>
+            </div>
+            <button style="border: none; border-radius: 50%; background-color: #c4ff4d; color: black;"><span class="project-arrow"><!--↗-->2</span></button>
+          </div>
+        </article>
+
+        <article class="project-card project-social">
+          <div class="project-art social-art">
+            <div class="social-poster">
+              <span>YOUR NEXT BIG IDEA</span>
+              <h3>STAND<br><span>OUT.</span></h3>
+              <div class="poster-circle">✳</div>
+              <p >Social media design concept</p>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <h3>Social Media Campaign</h3>
+              <p style="font-size: 0.9rem;">Graphic design concept</p>
+            </div>
+            <button style="border: none; border-radius: 50%; background-color: #c4ff4d; color: black;"><span class="project-arrow">3</span></button>
+          </div>
+        </article>
+      </div>
+      
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="about section" id="about">
+
+      <div class="about-visual">
+        <div class="about-frame">
+          <span class="about-star">✳</span>
+          <span class="about-outline">CREATE<br>WITH<br>PURPOSE.</span>
+          <span class="about-caption">GOOD IDEAS DESERVE GREAT EXECUTION.</span>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <p class="eyebrow" style="font-size: 20PX; font-weight: bold;">ABOUT codeBUILD. TECHNOLOGIES</p>
+        <h2>Small details.<br><span class="muted-text">Big difference.</span></h2>
+
+        <p style="font-size: large;">
+          We combine technology and creativity to help businesses,
+          entrepreneurs and individuals establish a stronger digital presence.
+        </p>
+
+        <p style="font-size: large;">
+          Our approach is simple: understand your goals, design with purpose,
+          build with care and deliver an experience that works.
+        </p>
+
+        <div class="values-grid" >
+          <div>
+            <span>01</span>
+            <h4>Purposeful</h4 >
+            <p>Every project starts with your goals.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <h4>Creative</h4>
+            <p>Ideas shaped around your identity.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <h4>Responsive</h4>
+            <p>Experiences built for every screen.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <h4>Collaborative</h4>
+            <p>Your input matters at every step.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== WORK PROCESS SECTION ==================== -->
+    <section class="process section">
+      <div class="section-heading">
+        <p class="eyebrow" style="font-size: 20px; font-weight: bold;">HOW WE WORK</p>
+        <h2>From first idea<br>to <span class="gradient-text">final delivery.</span></h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <span>01</span>
+          <h3>Discover</h3>
+          <p>We discuss your goals, audience, requirements and vision.</p>
+        </div>
+
+        <div class="process-step">
+          <span>02</span>
+          <h3>Design</h3>
+          <p>We plan the structure and create a visual direction.</p>
+        </div>
+
+        <div class="process-step">
+          <span>03</span>
+          <h3>Build</h3>
+          <p>We develop, refine and test the work across devices.</p>
+        </div>
+
+        <div class="process-step">
+          <span>04</span>
+          <h3>Deliver</h3>
+          <p>We present the finished work and discuss next steps.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact section" id="contact">
+      <div class="contact-panel">
+
+        <div class="contact-copy">
+          <p class="eyebrow">HAVE A PROJECT IN MIND?</p>
+          <h2>Let's make<br>something <span class="gradient-text">remarkable.</span></h2>
+
+          <p style="font-size: 20px;">
+            Tell us what you are planning. Whether you need a website, web app,
+            a logo or a complete visual identity, let's explore the possibilities.
+          </p>
+
+          <div class="contact-prompt" style="font-size: 15px;">
+            <span class="status-dot"></span>
+            Available for project enquiries
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact-form" action="https://formspree.io/f/mjygwdjv" method="POST">
+          <div data-fs-success style="color: var(--green);"></div>
+          <div data-fs-error style="color: #ff6b6b;"></div>
+          
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" placeholder="e.g. Samuel Cole" required>
+
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="service">What do you need?</label>
+          <select id="service" name="service" required>
+            <option value="">Choose a service</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Brand Identity">Brand Identity</option>
+            <option value="Multiple Services">Other</option>
+          </select>
+
+          <label for="budget">Enter your budget</label>
+          <input id="budget" type="number" name="budget" placeholder="In USD: e.g 100" required>
+
+          <label for="message">Tell us about your project</label>
+          <textarea id="message" name="message" rows="4" placeholder="A little about your idea, goals and timeline..." required></textarea>
+
+          <button class="button button-primary submit-button" type="submit">
+            Submit enquiry ↗
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#contact" >Get Started</a>
+      <a href="#work">Our Work</a>
+      <a href="#contact">Contact</a>
+   </div>
+   <div>
+
+           <span id="typingTexts"  class="gradient-text"        ></span>
+           <span class="cursor">|</span>
+
+    </div>
+
+    
+
+    
+
+    <span class="copyright">
+      © <span id="year"></span> codeBUILD. Technologies. All rights reserved.
+    </span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

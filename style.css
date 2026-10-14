@@ -1,0 +1,1606 @@
+
+/* =========================================================
+   1. GOOGLE FONTS
+   DM Sans: Body text
+   Space Grotesk: Headings and display text
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+/* =========================================================
+   2. THEME VARIABLES
+   Default theme: Dark
+   CSS variables make it easy to change the entire theme.
+   ========================================================= */
+
+:root {
+  --bg: #0d0f12;
+  --surface: #101313;
+  --surface-light: #171b1a;
+
+  --text: #f3f5ef;
+  --muted: #969d97;
+
+  --green: #c4ff4d;
+  --purple: #a68aff;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input-bg: #0c0f0e;
+  --overlay-bg: rgba(8, 10, 10, 0.97);
+
+  --particle-rgb: 196, 255, 77;
+  --line-rgb: 160, 210, 112;
+
+  --max-width: 1200px;
+}
+
+
+/* =========================================================
+   3. LIGHT THEME
+   These values override the dark theme when the HTML
+   element or body has data-theme="light".
+   ========================================================= */
+
+[data-theme="light"] {
+  --bg: #f3f5ef;
+  --surface: #ffffff;
+  --surface-light: #f8fafa;
+
+  --text: #080a0a;
+  --muted: #5e6660;
+
+  --green: #4f8000;
+  --purple: #6c47d9;
+
+  --border: rgba(0, 0, 0, 0.12);
+  --input-bg: #ffffff;
+  --overlay-bg: rgba(243, 245, 239, 0.97);
+
+  --particle-rgb: 79, 128, 0;
+  --line-rgb: 90, 130, 30;
+}
+
+
+/* =========================================================
+   4. GLOBAL RESET AND BASE STYLES
+   Removes default browser spacing and standardizes sizing.
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Remove default link decoration. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Use the same font as the surrounding interface. */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Remove the default mobile tap highlight. */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Show pointer cursors only on interactive elements. */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   5. BACKGROUND EFFECTS
+   The canvas can display your JavaScript-powered 3D scene.
+   The pseudo-element adds subtle green and purple lighting.
+   ========================================================= */
+
+#background3d {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.90;
+}
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 15%,
+      rgba(101, 145, 52, 0.09),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 85% 30%,
+      rgba(121, 92, 191, 0.08),
+      transparent 40%
+    );
+}
+
+/* Keep the main website content above the background. */
+.navbar,
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   6. NAVIGATION BAR
+   Contains the logo, navigation links, and theme controls.
+   ========================================================= */
+
+.navbar {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 24px 28px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid var(--border);
+}
+
+/* Website logo. */
+.logo {
+  font: 700 3.35rem 'Space Grotesk', sans-serif;
+  letter-spacing: -0.07em;
+}
+
+.logo span {
+  color: var(--green);
+  margin-left: 5px;
+  font-size: 0.82em;
+  letter-spacing: -0.03em;
+}
+
+/* Desktop navigation links. */
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar nav a {
+  font-size: 20px;
+  color: var(--muted);
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+/* Highlight links when the user hovers over them. */
+.navbar nav a:hover,
+.footer-links a:hover {
+  color: var(--green);
+}
+
+/* Main navigation call-to-action. */
+.navbar nav .nav-cta {
+  color: var(--bg);
+  background: var(--green);
+  padding: 10px 17px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+/* Dark/light theme toggle button. */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  color: var(--text);
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: scale(1.05);
+}
+
+/* Hidden on desktop; displayed on mobile. */
+.menu-toggle {
+  display: none;
+
+  color: var(--text);
+  background: transparent;
+  border: 0;
+
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   7. GENERAL SECTION LAYOUT
+   Standard width and spacing for the main page sections.
+   ========================================================= */
+
+.section {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 110px 28px;
+}
+
+
+/* =========================================================
+   8. HERO SECTION
+   The opening section with the main heading and 3D artwork.
+   ========================================================= */
+
+.hero {
+  min-height: 680px;
+
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 55px;
+
+  position: relative;
+
+  padding-top: 90px;
+  padding-bottom: 110px;
+}
+
+/* Small uppercase labels above headings. */
+.eyebrow {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-bottom: 22px;
+}
+
+/* Small glowing availability indicator. */
+.status-dot {
+  display: inline-block;
+
+  width: 8px;
+  height: 8px;
+
+  background: var(--green);
+  border-radius: 50%;
+
+  box-shadow: 0 0 12px rgba(196, 255, 77, 0.6);
+  margin-right: 8px;
+}
+
+/* Shared typography for headings. */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+/* Responsive heading sizes. */
+h1 {
+  font-size: clamp(3.5rem, 7vw, 6.3rem);
+}
+
+h2 {
+  font-size: clamp(2.7rem, 5vw, 4.5rem);
+}
+
+/* Gradient-colored heading text. */
+.gradient-text {
+  background: linear-gradient(
+    100deg,
+    var(--green),
+    #a3e635 48%,
+    var(--purple)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Reusable muted text. */
+.muted-text {
+  color: var(--muted);
+}
+
+/* Hero introduction paragraph. */
+.hero-description {
+  max-width: 530px;
+
+  color: var(--muted);
+  font-size: 20px;
+
+  margin: 27px 0 30px;
+}
+
+/* Arrange hero action buttons horizontally. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+/* Shared button appearance and hover movement. */
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  padding: 14px 20px;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+}
+
+/* Primary action button. */
+.button-primary {
+  background: var(--green);
+  color: var(--bg);
+}
+
+/* Secondary action button. */
+.button-secondary {
+  border-color: var(--border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Short note displayed beneath the hero buttons. */
+.hero-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 45px;
+
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.hero-note span:not(.note-line) {
+  color: var(--green);
+  padding: 0 4px;
+}
+
+.note-line {
+  width: 32px;
+  height: 1px;
+  background: var(--green);
+}
+
+/* Small metadata labels at the bottom of the hero. */
+.hero-bottom {
+  position: absolute;
+  bottom: 25px;
+  left: 28px;
+  right: 28px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--muted);
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   9. HERO 3D VISUAL
+   Decorative card, geometric shapes, and floating labels.
+   ========================================================= */
+
+.hero-visual {
+  position: relative;
+  min-height: 440px;
+
+  display: grid;
+  place-items: center;
+
+  perspective: 1000px;
+}
+
+/* Main visual window. */
+.visual-card {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 410px);
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+
+  background: var(--surface-light);
+  backdrop-filter: blur(12px);
+
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.25);
+
+  transform: rotateY(-7deg) rotateX(3deg);
+}
+
+/* Top and bottom information bars. */
+.visual-card-top,
+.visual-card-bottom {
+  padding: 17px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: var(--muted);
+  font-size: 0.61rem;
+  letter-spacing: 0.08em;
+}
+
+.window-dots {
+  color: var(--green);
+  letter-spacing: 0.15em;
+}
+
+/* Artwork background inside the visual card. */
+.visual-art {
+  height: 260px;
+
+  position: relative;
+  overflow: hidden;
+
+  background: radial-gradient(
+    ellipse at 55% 50%,
+    #2d3d20,
+    #151a14 45%,
+    #101313 78%
+  );
+}
+
+/* Glowing central sphere. */
+.art-circle {
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  background: linear-gradient(135deg, var(--green), #6e8e37);
+  border-radius: 50%;
+
+  left: 30%;
+  top: 20%;
+
+  box-shadow: 0 0 80px rgba(196, 255, 77, 0.17);
+}
+
+/* Elliptical ring around the sphere. */
+.art-ring {
+  position: absolute;
+
+  width: 200px;
+  height: 200px;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+
+  left: 24%;
+  top: 11%;
+
+  transform: rotateX(60deg) rotate(-20deg);
+}
+
+/* Decorative square. */
+.art-square {
+  position: absolute;
+
+  width: 90px;
+  height: 90px;
+
+  border: 1px solid var(--purple);
+
+  transform: rotate(35deg);
+
+  top: 33%;
+  left: 48%;
+}
+
+/* Decorative cross symbol. */
+.art-cross {
+  position: absolute;
+
+  color: white;
+  font-size: 2.8rem;
+
+  right: 14%;
+  top: 10%;
+}
+
+/* Small label inside the artwork. */
+.art-label {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #e6f4d2;
+}
+
+/* Project title inside the card footer. */
+.visual-card-bottom h3 {
+  color: var(--text);
+  margin-top: 5px;
+  font-size: 1.3rem;
+}
+
+.small-label {
+  font-size: 0.56rem;
+}
+
+.visual-number {
+  color: var(--green);
+}
+
+/* Decorative elliptical orbit rings. */
+.orbit {
+  position: absolute;
+
+  width: 450px;
+  height: 200px;
+
+  border: 1px solid rgba(196, 255, 77, 0.12);
+  border-radius: 50%;
+
+  transform: rotate(-30deg);
+}
+
+/* Second orbit uses purple accents. */
+.orbit-two {
+  transform: rotate(45deg);
+  border-color: rgba(166, 138, 255, 0.16);
+}
+
+/* Floating labels layered over the visual. */
+.floating-tag {
+  position: absolute;
+  z-index: 3;
+
+  padding: 11px 15px;
+
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  font-size: 0.73rem;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+/* Floating label in the top-right corner. */
+.tag-top {
+  top: 55px;
+  right: -5px;
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Floating label in the bottom-left corner. */
+.tag-bottom {
+  bottom: 35px;
+  left: -15px;
+
+  color: var(--green);
+
+  animation: float 5s ease-in-out infinite reverse;
+}
+
+/* Vertical floating animation. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+/* =========================================================
+   10. SERVICES SECTION
+   Three-column layout containing service cards.
+   ========================================================= */
+
+.services {
+  border-top: 1px solid var(--border);
+}
+
+/* Heading and introduction shared by sections. */
+.section-heading {
+  max-width: 650px;
+  margin-bottom: 50px;
+}
+
+.section-heading > p:last-child {
+  max-width: 500px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+
+/* Responsive grid for service cards. */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+/* Individual service card. */
+.service-card {
+  border: 2px solid var(--border);
+  background: var(--surface);
+
+  border-radius: 9px;
+  padding: 30px 27px;
+
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    background 0.25s ease;
+
+  backdrop-filter: blur(8px);
+}
+
+/* Lift a service card on hover. */
+.service-card:hover {
+  border-color: var(--green);
+  transform: translateY(-5px);
+}
+
+/* Highlight the featured service. */
+.featured-card {
+  border-color: var(--green);
+
+  background: linear-gradient(
+    150deg,
+    rgba(196, 255, 77, 0.05),
+    var(--surface) 60%
+  );
+}
+
+/* Icon container for each service. */
+.service-icon {
+  display: grid;
+  place-items: center;
+
+  width: 51px;
+  height: 51px;
+
+  border-radius: 9px;
+
+  background: rgba(196, 255, 77, 0.09);
+  color: var(--green);
+
+  font: 700 1.3rem 'Space Grotesk', sans-serif;
+
+  margin-bottom: 35px;
+}
+
+/* Service numbering. */
+.service-number {
+  font-size: 1rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* Service title. */
+.service-card h3 {
+  font-size: 1.55rem;
+  margin: 13px 0;
+}
+
+/* Service description. */
+.service-card > p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  min-height: 88px;
+}
+
+/* Service features list. */
+.service-card ul {
+  list-style: none;
+
+  margin: 25px 0;
+  padding-top: 17px;
+
+  border-top: 1px solid var(--border);
+}
+
+/* Individual service features. */
+.service-card li {
+  color: var(--text);
+  font-size: 0.84rem;
+  margin: 9px 0;
+}
+
+/* Add an arrow before each feature. */
+.service-card li::before {
+  content: "↗";
+  color: var(--green);
+  margin-right: 9px;
+}
+
+/* Text links used throughout the site. */
+.text-link {
+  display: inline-block;
+
+  font-size: 1rem;
+  color: var(--green);
+  font-weight: 700;
+
+  margin-top: 5px;
+}
+
+
+/* =========================================================
+   11. WORK / PORTFOLIO SECTION
+   Displays project cards with interactive 3D hover effects.
+   ========================================================= */
+
+.work {
+  border-top: 1px solid var(--border);
+}
+
+/* Arrange the section heading and description. */
+.work-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+
+  gap: 30px;
+  margin-bottom: 42px;
+}
+
+.work-heading > p {
+  max-width: 330px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Three-column portfolio grid. */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Project card base styles and 3D perspective. */
+.project-card {
+  min-width: 0;
+
+  transform: perspective(1000px);
+  transform-style: preserve-3d;
+
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+/* Tilt and lift the card when hovered. */
+.project-card:hover {
+  transform:
+    perspective(1000px)
+    rotateX(5deg)
+    rotateY(-7deg)
+    translateY(-10px);
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Artwork container shared by all project previews. */
+.project-art {
+  height: 300px;
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+}
+
+/* Smooth scaling for artwork elements. */
+.project-art > * {
+  transition: transform 0.5s ease;
+}
+
+/* Enlarge the artwork when its card is hovered. */
+.project-card:hover .project-art > * {
+  transform: scale(1.05);
+}
+
+/* Website mockup project background. */
+.web-art {
+  background: #1a2118;
+}
+
+/* Browser window illustration. */
+.mock-browser {
+  width: 100%;
+
+  background: #f0f0e8;
+  color: #20241e;
+
+  border-radius: 5px;
+  overflow: hidden;
+
+  transform: rotate(-3deg);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Browser toolbar. */
+.browser-bar {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 8px 10px;
+
+  font-size: 0.52rem;
+  color: #535b4f;
+
+  border-bottom: 1px solid #d6d8cf;
+}
+
+/* Content inside the mock browser. */
+.browser-content {
+  position: relative;
+
+  min-height: 210px;
+  padding: 25px 17px;
+
+  overflow: hidden;
+}
+
+.mock-label {
+  font-size: 0.5rem;
+  letter-spacing: 0.13em;
+}
+
+/* Large title inside the website preview. */
+.mock-title {
+  font: 700 2.3rem/0.95 'Space Grotesk', sans-serif;
+
+  margin: 17px 0;
+  letter-spacing: -0.08em;
+}
+
+/* Button inside the website preview. */
+.mock-button {
+  display: inline-block;
+
+  background: #c4ff4d;
+  color: #101313;
+
+  font-size: 0.55rem;
+  padding: 7px 10px;
+}
+
+/* Decorative sphere in the website preview. */
+.mock-shape {
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(130deg, #c4ff4d, #718d3d);
+
+  right: -20px;
+  bottom: -35px;
+}
+
+/* Graphic design / branding project. */
+.brand-art {
+  background: #d9d0ff;
+}
+
+/* Branding poster illustration. */
+.brand-poster {
+  width: 175px;
+  height: 235px;
+
+  background: #4d3b89;
+  color: #f7f3e9;
+
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow: 10px 12px 0 rgba(25, 18, 45, 0.25);
+
+  transform: rotate(5deg);
+}
+
+.brand-poster > span {
+  font-size: 0.48rem;
+  letter-spacing: 0.15em;
+}
+
+/* Large branding symbol. */
+.brand-symbol {
+  font: 700 3.5rem 'Space Grotesk', sans-serif;
+  color: #c4ff4d;
+}
+
+/* Branding poster title. */
+.brand-poster h3 {
+  font-size: 1.5rem;
+  line-height: 0.95;
+}
+
+.brand-caption {
+  color: #cfc4ff;
+}
+
+/* Social media design project. */
+.social-art {
+  background: #e2ff91;
+}
+
+/* Social media poster illustration. */
+.social-poster {
+  position: relative;
+
+  width: 180px;
+  height: 230px;
+
+  padding: 15px;
+
+  background: #151815;
+  color: white;
+
+  overflow: hidden;
+
+  transform: rotate(-4deg);
+
+  box-shadow: 10px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+.social-poster > span {
+  font-size: 0.48rem;
+  letter-spacing: 0.1em;
+}
+
+/* Large poster heading. */
+.social-poster h3 {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 35px;
+
+  font-size: 2.5rem;
+  line-height: 0.85;
+}
+
+/* Highlight a word in the poster heading. */
+.social-poster h3 span {
+  color: var(--green);
+}
+
+/* Decorative poster circle. */
+.poster-circle {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  color: var(--purple);
+  font-size: 5rem;
+}
+
+/* Small poster footer text. */
+.social-poster p {
+  position: absolute;
+  bottom: 14px;
+  left: 15px;
+  z-index: 2;
+
+  font-size: 0.45rem;
+}
+
+/* Project title and category information. */
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 2px;
+}
+
+.project-info h3 {
+  font-size: 1.08rem;
+  letter-spacing: -0.025em;
+}
+
+.project-info p {
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Circular arrow beside each project. */
+.project-arrow {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+/* Additional portfolio information. */
+.portfolio-note {
+  color: var(--muted);
+  font-size: 0.73rem;
+  margin-top: 15px;
+}
+
+
+/* =========================================================
+   12. ABOUT SECTION
+   Two-column layout containing artwork and company details.
+   ========================================================= */
+
+.about {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+
+  gap: 80px;
+  align-items: center;
+
+  border-top: 1px solid var(--border);
+}
+
+/* Artwork container on the left. */
+.about-visual {
+  min-height: 430px;
+
+  display: grid;
+  place-items: center;
+}
+
+/* Square artwork frame. */
+.about-frame {
+  position: relative;
+
+  width: min(100%, 390px);
+  height: 390px;
+
+  border: 1px solid var(--border);
+
+  background: radial-gradient(
+    ellipse at 45% 45%,
+    rgba(196, 255, 77, 0.1),
+    transparent 60%
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+/* Decorative outer and inner circles. */
+.about-frame::before,
+.about-frame::after {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+/* Inner circle with a purple border. */
+.about-frame::after {
+  width: 210px;
+  height: 210px;
+
+  border-color: rgba(166, 138, 255, 0.35);
+}
+
+/* Decorative star. */
+.about-star {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+
+  font-size: 2rem;
+  color: var(--green);
+}
+
+/* Central text in the artwork frame. */
+.about-outline {
+  z-index: 1;
+
+  font: 700 clamp(2.6rem, 5vw, 4rem)/0.9 'Space Grotesk', sans-serif;
+  letter-spacing: -0.08em;
+}
+
+/* Small caption at the bottom of the frame. */
+.about-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+}
+
+/* About text paragraphs, excluding eyebrow labels. */
+.about-content > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-top: 20px;
+}
+
+/* Two-column grid for company values. */
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px 30px;
+  margin-top: 35px;
+}
+
+/* Individual company value. */
+.values-grid > div {
+  border-top: 1px solid var(--border);
+  padding-top: 13px;
+}
+
+.values-grid span {
+  color: var(--green);
+  font-size: 0.7rem;
+}
+
+.values-grid h4 {
+  font-size: 1.02rem;
+  margin: 7px 0;
+  letter-spacing: -0.02em;
+}
+
+.values-grid p {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   13. WORK PROCESS SECTION
+   Four-column layout describing the stages of a project.
+   ========================================================= */
+
+.process {
+  border-top: 1px solid var(--border);
+}
+
+/* Arrange the process steps in four columns. */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px;
+  margin-top: 55px;
+}
+
+/* Individual process step. */
+.process-step {
+  border-top: 1px solid var(--green);
+  padding-top: 20px;
+
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Step number. */
+.process-step > span {
+  color: var(--green);
+  font: 600 1.6rem 'Space Grotesk', sans-serif;
+}
+
+/* Step heading. */
+.process-step h3 {
+  font-size: 1.25rem;
+  margin: 20px 0 10px;
+}
+
+/* Step description. */
+.process-step p {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+/* Subtle hover effect for the entire process grid. */
+.process-grid:hover .process-step {
+  border-color: var(--purple);
+}
+
+
+/* =========================================================
+   14. CONTACT SECTION
+   Contact information and inquiry form.
+   ========================================================= */
+
+.contact {
+  border-top: 1px solid var(--border);
+}
+
+/* Two-column contact panel. */
+.contact-panel {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+
+  gap: 65px;
+  padding: 60px;
+
+  border: 2px solid var(--green);
+  border-radius: 12px;
+
+  background: var(--surface);
+}
+
+/* Main contact heading. */
+.contact-copy h2 {
+  font-size: clamp(2.7rem, 5vw, 4.3rem);
+}
+
+/* Contact introduction. */
+.contact-copy > p:not(.eyebrow) {
+  max-width: 440px;
+  color: var(--muted);
+  margin-top: 25px;
+}
+
+/* Short message below the introduction. */
+.contact-prompt {
+  margin-top: 35px;
+  color: var(--text);
+  font-size: 0.8rem;
+}
+
+/* Stack contact form fields vertically. */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels above form controls. */
+.contact-form label {
+  color: var(--text);
+  font-size: 1rem;
+  margin: 12px 0 7px;
+}
+
+/* Shared input, select, and textarea styling. */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+
+  color: var(--text);
+  background: var(--input-bg);
+
+  border: 1px solid var(--border);
+  border-radius: 5px;
+
+  padding: 12px 13px;
+  outline: none;
+}
+
+/* Highlight focused form controls. */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--green);
+}
+
+/* Match dropdown options to the active theme. */
+.contact-form select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Allow vertical resizing of the message field. */
+.contact-form textarea {
+  resize: vertical;
+}
+
+/* Add space above the submit button. */
+.submit-button {
+  margin-top: 20px;
+}
+
+/* Small note beneath the form. */
+.form-note {
+  color: var(--muted);
+  font-size: 0.7rem;
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   15. FOOTER
+   Contains copyright text and navigation links.
+   ========================================================= */
+
+.footer {
+  max-width: var(--max-width);
+  margin: auto;
+
+  padding: 30px 28px 40px;
+
+  border-top: 1px solid var(--border);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Footer text and copyright notice. */
+.footer > p,
+.copyright {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+/* Footer navigation links. */
+.footer-links {
+  display: flex;
+  gap: 20px;
+
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   16. TYPING TEXT
+   Styling for animated text controlled by JavaScript.
+   ========================================================= */
+
+.typing-container {
+  min-height: 45px;
+
+  font-size: 48px;
+  font-weight: bold;
+
+  /* Uses the theme's main text color. */
+  color: var(--text);
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   17. RESPONSIVE DESIGN: TABLETS
+   Adjust the layout for screens 900px wide or smaller.
+   ========================================================= */
+
+
+/* MOBILE NAVIGATION — CLEAN FIX */
+@media (max-width: 650px) {
+
+  .contact-panel{
+    display: flex;
+    flex-direction: column;
+  }
+  .process-grid{
+    display: flex;
+    flex-direction: column;
+
+  }
+  #about{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .project-grid{
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-visual{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px 16px;
+    background: var(--bg);
+  }
+
+  .navbar .logo {
+    min-width: 0;
+    font-size: clamp(24px, 6vw, 34px);
+    white-space: nowrap;
+  }
+
+  .menu-toggle {
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1003;
+  }
+
+  /* Navigation is removed from the normal page layout. */
+  .navbar nav {
+    display: flex !important;
+    position: fixed !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+
+    width: min(80vw, 300px);
+    height: 100vh;
+    height: 100dvh;
+    box-sizing: border-box;
+
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+
+    padding: 110px 22px 30px;
+    overflow-y: auto;
+
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+
+    transform: translateX(110%);
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform 0.25s ease,
+      visibility 0.25s ease;
+
+    z-index: 1002;
+  }
+
+  /* Open the drawer only when JavaScript adds .open. */
+  .navbar nav.open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .navbar nav a {
+    display: block;
+    padding: 14px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .navbar nav a:hover,
+  .navbar nav a:focus-visible {
+    color: var(--accent);
+    background: rgba(196, 255, 77, 0.12);
+  }
+
+  body.sidebar-open {
+    overflow: hidden;
+  }
+
+  /* Keep the hero in the page layout, below the header. */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 55px 20px 70px;
+    gap: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 10vw, 58px);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+}

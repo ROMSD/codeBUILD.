@@ -1501,7 +1501,7 @@ h2 {
     background: var(--bg);
   }
    .hero-content{
-      margin-top: 10px;
+      margin-top: 20px;
    }
 
   /* Stop the logo from pushing the controls off-screen. */

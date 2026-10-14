@@ -1473,9 +1473,32 @@ h2 {
    ========================================================= */
 
 
-
 /* MOBILE NAVIGATION — CLEAN FIX */
 @media (max-width: 650px) {
+
+  .contact-panel{
+    display: flex;
+    flex-direction: column;
+  }
+  .process-grid{
+    display: flex;
+    flex-direction: column;
+
+  }
+  #about{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .project-grid{
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-visual{
+    display: flex;
+    flex-direction: column;
+  }
+
 
   .navbar {
     position: sticky;

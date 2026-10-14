@@ -1475,11 +1475,6 @@ h2 {
 
 /* MOBILE NAVIGATION — CLEAN FIX */
 
-/* =========================================================
-   MOBILE NAVIGATION DRAWER — OVERLAP FIX
-   Add this block at the VERY END of style.css.
-   ========================================================= */
-
 @media screen and (max-width: 768px) {
 
     /* Keep the header above the page content. */
